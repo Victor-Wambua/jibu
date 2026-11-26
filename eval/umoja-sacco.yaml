@@ -1,0 +1,284 @@
+# Labelled evaluation set for kb/umoja-sacco.yaml (synthetic, written by the author).
+#
+# Each case:  [kind, expected, question]            or, for follow-ups,
+#             [followup, expected, question, earlier_question_in_same_session]
+#   kind      en | sw | mixed (code-switching, incl. light Sheng) | typo | followup | oos | smalltalk
+#   expected  an entry id, "@smalltalk", or ~ (null) meaning "must hand off to a human"
+#
+# Split rule (see jibu/evaluation.py): case number n (0-based) is "dev" when n % 5 is 0, 1 or 2,
+# otherwise "test". Thresholds and stemmer/synonym choices were tuned on dev only.
+# "as_of" fixes today's date so entry validity windows are deterministic.
+
+kb: umoja-sacco
+as_of: 2026-06-01
+
+cases:
+  # --- membership-eligibility
+  - [en, membership-eligibility, "Who is allowed to be a member?"]
+  - [en, membership-eligibility, "I am 30 and live in Kisumu, can I join the sacco?"]
+  - [sw, membership-eligibility, "Ni watu gani wanaruhusiwa kujiunga?"]
+  - [sw, membership-eligibility, "Naweza kuwa mwanachama wa Umoja nikiwa na miaka 40?"]
+  - [mixed, membership-eligibility, "Naweza join Umoja Sacco kama niko Mombasa?"]
+  - [typo, membership-eligibility, "who can becom a membr of the sacco"]
+  # --- how-to-join
+  - [en, how-to-join, "I want to become a member, what do I do?"]
+  - [en, how-to-join, "What do I need to bring to register?"]
+  - [sw, how-to-join, "Nataka kujiunga, nifanye nini?"]
+  - [sw, how-to-join, "Nahitaji kuleta nini nikijisajili?"]
+  - [mixed, how-to-join, "Nataka kujiunga na sacco yenu, documents zipi zinahitajika?"]
+  - [typo, how-to-join, "how do i regster as a new memeber"]
+  # --- membership-fee
+  - [en, membership-fee, "What's the joining fee?"]
+  - [en, membership-fee, "How much do I pay to register?"]
+  - [sw, membership-fee, "Ni shilingi ngapi kujiunga?"]
+  - [sw, membership-fee, "Ada ya kuingia ni ngapi?"]
+  - [mixed, membership-fee, "Joining fee ni how much?"]
+  - [typo, membership-fee, "membershp fee amount"]
+  # --- youth-membership
+  - [en, youth-membership, "Is there a cheaper account for students?"]
+  - [en, youth-membership, "I'm 19, do you have a youth account?"]
+  - [sw, youth-membership, "Kuna akaunti ya vijana?"]
+  - [sw, youth-membership, "Mwanafunzi anaweza kujiunga na kulipa kiasi gani?"]
+  - [mixed, youth-membership, "Vijana wanalipa ada gani ya registration?"]
+  - [typo, youth-membership, "studnet membership fee"]
+  # --- group-membership
+  - [en, group-membership, "Our women's group wants to open an account with you"]
+  - [en, group-membership, "Can a chama register with the sacco?"]
+  - [sw, group-membership, "Kikundi chetu cha akina mama kinataka kufungua akaunti"]
+  - [sw, group-membership, "Chama kinawezaje kuwa mwanachama?"]
+  - [mixed, group-membership, "Group yetu inaweza kujiunga?"]
+  # --- share-capital
+  - [en, share-capital, "What are shares and how much do they cost?"]
+  - [en, share-capital, "When will I get my shares back?"]
+  - [sw, share-capital, "Hisa za chini kabisa ni ngapi?"]
+  - [sw, share-capital, "Nikitaka kutoa hisa zangu inawezekana?"]
+  - [mixed, share-capital, "Minimum share capital ni ngapi?"]
+  # --- savings-products
+  - [en, savings-products, "What kinds of savings do you have?"]
+  - [en, savings-products, "Do you have an account for my kids?"]
+  - [sw, savings-products, "Aina za akiba mnazotoa ni zipi?"]
+  - [sw, savings-products, "Akiba Flexi ni nini?"]
+  - [mixed, savings-products, "Nataka kujua savings products zenu"]
+  # --- fixed-deposit
+  - [en, fixed-deposit, "What interest do I get if I lock money for a year?"]
+  - [en, fixed-deposit, "What is the fixed deposit minimum?"]
+  - [sw, fixed-deposit, "Riba ya amana ya muda maalum ni asilimia ngapi?"]
+  - [mixed, fixed-deposit, "Fixed deposit ya 6 months riba ni ngapi?"]
+  # --- deposit-mpesa
+  - [en, deposit-mpesa, "What's the paybill for saving?"]
+  - [en, deposit-mpesa, "How do I send my contributions via M-Pesa?"]
+  - [sw, deposit-mpesa, "Nitumie vipi akiba yangu kupitia M-Pesa?"]
+  - [sw, deposit-mpesa, "Paybill number ya sacco ni ipi?"]
+  - [mixed, deposit-mpesa, "Nataka kuweka pesa kwa mpesa, account number ni gani?"]
+  - [mixed, deposit-mpesa, "Nataka kuweka doh kwa sacco kupitia mpesa"]
+  - [typo, deposit-mpesa, "how to deposite money by mpesa"]
+  # --- deposit-not-reflecting
+  - [en, deposit-not-reflecting, "I sent my monthly savings yesterday and it's not in my account"]
+  - [sw, deposit-not-reflecting, "Nilituma pesa jana lakini hazijaonekana kwenye akaunti"]
+  - [mixed, deposit-not-reflecting, "Nimetuma pesa through paybill lakini bado haijaonekana"]
+  # --- wrong-paybill
+  - [en, wrong-paybill, "I typed the wrong account number on paybill, help"]
+  - [sw, wrong-paybill, "Nimetuma pesa kwa akaunti isiyo sahihi, nifanyeje?"]
+  - [mixed, wrong-paybill, "Nilituma pesa kwa wrong paybill, naweza kurudishiwa?"]
+  - [en, wrong-paybill, "Can money sent by mistake be returned?"]
+  # --- withdraw-flexi
+  - [en, withdraw-flexi, "I need to take out some savings"]
+  - [en, withdraw-flexi, "How do I get my money out of Akiba Flexi?"]
+  - [sw, withdraw-flexi, "Naweza kutoa pesa zangu za akiba lini?"]
+  - [sw, withdraw-flexi, "Nataka kutoa pesa kwenye akaunti yangu"]
+  - [mixed, withdraw-flexi, "Withdrawal ya flexi inachukua muda gani?"]
+  # --- loan-types
+  - [en, loan-types, "Which loan products do you have?"]
+  - [sw, loan-types, "Mikopo mnayotoa ni ipi?"]
+  - [sw, loan-types, "Je, kuna mkopo wa dharura?"]
+  # --- loan-eligibility
+  - [en, loan-eligibility, "What must I have done before I can borrow?"]
+  - [en, loan-eligibility, "Am I qualified for a loan if I joined 3 months ago?"]
+  - [sw, loan-eligibility, "Nikijiunga mwezi uliopita naweza kupata mkopo?"]
+  - [sw, loan-eligibility, "Ni vigezo gani vinahitajika kupata mkopo?"]
+  - [mixed, loan-eligibility, "Nikiwa member kwa miezi 4, nastahili loan?"]
+  - [typo, loan-eligibility, "loan eligibilty criteria"]
+  # --- loan-limit
+  - [en, loan-limit, "What's the biggest loan I can get?"]
+  - [en, loan-limit, "How much money can the sacco lend me?"]
+  - [sw, loan-limit, "Naweza kupata mkopo wa hadi shilingi ngapi?"]
+  - [sw, loan-limit, "Mkopo wa juu zaidi ni kiasi gani?"]
+  - [mixed, loan-limit, "Loan limit yangu ni ngapi?"]
+  - [mixed, loan-limit, "Nitakopeshwa doh ngapi?"]
+  # --- loan-interest
+  - [en, loan-interest, "How much interest on a loan?"]
+  - [en, loan-interest, "What percentage do you charge on borrowed money?"]
+  - [sw, loan-interest, "Riba ya mkopo ni ngapi kwa mwezi?"]
+  - [sw, loan-interest, "Mnatoza asilimia ngapi kwa mikopo?"]
+  - [mixed, loan-interest, "Interest rate ya loan ni gani?"]
+  - [typo, loan-interest, "interst rate on loans"]
+  # --- loan-processing-fee
+  - [en, loan-processing-fee, "What do I pay upfront when taking a loan?"]
+  - [en, loan-processing-fee, "Is there an application fee for loans?"]
+  - [sw, loan-processing-fee, "Kuna ada ya kusindika mkopo?"]
+  - [mixed, loan-processing-fee, "Processing fee ya loan ni ngapi?"]
+  # --- promo-school-fees
+  - [en, promo-school-fees, "Any discounts on school fees loans right now?"]
+  - [sw, promo-school-fees, "Mna ofa ya mkopo wa karo?"]
+  - [en, promo-school-fees, "Is the Elimu offer still on?"]
+  # --- loan-application
+  - [en, loan-application, "How do I request a loan?"]
+  - [en, loan-application, "I want to borrow, what's the process?"]
+  - [sw, loan-application, "Naomba mkopo kwa njia gani?"]
+  - [sw, loan-application, "Nahitaji kujua jinsi ya kuomba mkopo"]
+  - [mixed, loan-application, "Nataka kuapply loan, nifanyeje?"]
+  - [typo, loan-application, "how to aplly for a loan"]
+  # --- loan-guarantors
+  - [en, loan-guarantors, "Does a loan need someone to guarantee it?"]
+  - [en, loan-guarantors, "Can my friend be my guarantor?"]
+  - [sw, loan-guarantors, "Nahitaji kuleta mdhamini?"]
+  - [sw, loan-guarantors, "Nani anaweza kuwa mdhamini wangu?"]
+  - [mixed, loan-guarantors, "Guarantors wanahitajika wangapi kwa loan?"]
+  # --- loan-processing-time
+  - [en, loan-processing-time, "How many days until the loan hits my account?"]
+  - [en, loan-processing-time, "How quickly can I get an emergency loan?"]
+  - [sw, loan-processing-time, "Mkopo unachukua siku ngapi kutolewa?"]
+  # --- loan-repayment
+  - [en, loan-repayment, "Where do I pay my monthly loan instalment?"]
+  - [en, loan-repayment, "What date should I pay my loan by?"]
+  - [sw, loan-repayment, "Ninaweza kulipaje mkopo wangu kila mwezi?"]
+  - [sw, loan-repayment, "Marejesho ya mkopo ni tarehe ngapi?"]
+  - [mixed, loan-repayment, "Nalipa loan kwa paybill aje?"]
+  # --- loan-early-repayment
+  - [en, loan-early-repayment, "If I pay my loan off early do I get charged?"]
+  - [sw, loan-early-repayment, "Nikilipa mkopo wote mapema kuna faini?"]
+  - [mixed, loan-early-repayment, "Naweza clear loan yangu early?"]
+  # --- loan-late-penalty
+  - [en, loan-late-penalty, "What is the penalty if my loan is late?"]
+  - [en, loan-late-penalty, "I've missed my loan instalment, what now?"]
+  - [sw, loan-late-penalty, "Nikichelewa kulipa mkopo nitatozwa nini?"]
+  - [sw, loan-late-penalty, "Nimeshindwa kulipa mkopo mwezi huu"]
+  # --- loan-topup
+  - [en, loan-topup, "Can I borrow more on top of my current loan?"]
+  - [sw, loan-topup, "Naweza kuongezewa mkopo?"]
+  - [mixed, loan-topup, "Top up ya loan inawezekana?"]
+  # --- loan-insurance
+  - [en, loan-insurance, "Is there insurance on loans?"]
+  - [en, loan-insurance, "If the borrower passes away who pays the loan?"]
+  - [sw, loan-insurance, "Mkopaji akifariki nani analipa deni?"]
+  # --- loan-balance
+  - [en, loan-balance, "How can I see how much I still owe?"]
+  - [en, loan-balance, "Check my savings balance"]
+  - [sw, loan-balance, "Nitajuaje salio la mkopo?"]
+  - [mixed, loan-balance, "Check balance ya account yangu ni aje?"]
+  - [typo, loan-balance, "how do i chek my balence"]
+  # --- statement-request
+  - [en, statement-request, "I need a statement for my loan application at the bank"]
+  - [sw, statement-request, "Naomba taarifa ya akaunti yangu ya miezi 6"]
+  - [mixed, statement-request, "Naweza pata statement kwa email?"]
+  - [typo, statement-request, "how to get a stament"]
+  # --- dividends
+  - [en, dividends, "When do members get their dividend?"]
+  - [en, dividends, "What dividend did the sacco pay last year?"]
+  - [sw, dividends, "Gawio la mwaka huu litalipwa lini?"]
+  - [mixed, dividends, "Dividend ya members hulipwa lini?"]
+  # --- office-hours
+  - [en, office-hours, "When do you close?"]
+  - [en, office-hours, "Are you open on a public holiday?"]
+  - [sw, office-hours, "Mnafunga saa ngapi jioni?"]
+  - [sw, office-hours, "Mko wazi Jumapili?"]
+  - [mixed, office-hours, "Opening hours zenu ni gani?"]
+  - [typo, office-hours, "wat time do u opn"]
+  # --- branch-locations
+  - [en, branch-locations, "Where can I find your office in Kisumu?"]
+  - [en, branch-locations, "Do you have branches outside Nairobi?"]
+  - [sw, branch-locations, "Ofisi yenu iko wapi Nairobi?"]
+  - [sw, branch-locations, "Mna matawi mangapi?"]
+  - [mixed, branch-locations, "Office ya Nakuru iko wapi?"]
+  # --- contact-customer-care
+  - [en, contact-customer-care, "Give me a number to call"]
+  - [en, contact-customer-care, "How do I reach someone at the sacco?"]
+  - [sw, contact-customer-care, "Naweza kupiga simu nambari gani?"]
+  - [mixed, contact-customer-care, "WhatsApp number yenu ni ipi?"]
+  # --- complaints
+  - [en, complaints, "I want to complain about a staff member"]
+  - [sw, complaints, "Nataka kuwasilisha malalamiko kuhusu huduma"]
+  - [mixed, complaints, "Nina complaint, nipeleke wapi?"]
+  # --- change-phone-number
+  - [en, change-phone-number, "I changed my SIM, how do I update my number with you?"]
+  - [sw, change-phone-number, "Nimebadilisha namba ya simu, nifanyeje?"]
+  - [mixed, change-phone-number, "Naomba kubadilisha phone number kwenye account"]
+  # --- update-nominee
+  - [en, update-nominee, "I want to add my wife as beneficiary"]
+  - [sw, update-nominee, "Nataka kubadilisha mrithi wa akaunti yangu"]
+  - [mixed, update-nominee, "Naweza update next of kin?"]
+  # --- reset-pin
+  - [en, reset-pin, "I can't remember my PIN"]
+  - [sw, reset-pin, "Nimesahau nenosiri la USSD"]
+  - [mixed, reset-pin, "Nimesahau PIN, naweza reset aje?"]
+  # --- exit-membership
+  - [en, exit-membership, "I no longer want to be a member, what should I do?"]
+  - [en, exit-membership, "Will I get my savings back if I quit?"]
+  - [sw, exit-membership, "Nataka kujiondoa kwenye sacco"]
+  - [sw, exit-membership, "Nikijitoa nitarudishiwa pesa zangu lini?"]
+  - [mixed, exit-membership, "Nataka kuexit sacco, notice ni how long?"]
+  # --- welfare-funeral
+  - [en, welfare-funeral, "Does the sacco help with funeral costs?"]
+  - [sw, welfare-funeral, "Mwanachama akifariki mnasaidia familia vipi?"]
+  - [mixed, welfare-funeral, "Welfare fund ni ngapi kwa mwezi?"]
+  # --- follow-ups (need the earlier question in the same session)
+  - [followup, youth-membership, "and for students?", "How much is the membership fee?"]
+  - [followup, youth-membership, "na kwa vijana?", "How much is the membership fee?"]
+  - [followup, loan-processing-fee, "and the processing fee?", "What is the interest rate on loans?"]
+  - [followup, loan-early-repayment, "na nikilipa mapema?", "Riba ya mikopo ni asilimia ngapi?"]
+  - [followup, loan-late-penalty, "what if I am late?", "How do I repay my loan?"]
+  - [followup, deposit-not-reflecting, "and if it doesn't show?", "How do I deposit money using M-Pesa?"]
+  - [followup, membership-fee, "how much does it cost?", "How do I join?"]
+  - [followup, loan-processing-time, "how long does it take?", "How do I apply for a loan?"]
+  - [followup, loan-processing-time, "Na inachukua muda gani?", "Naombaje mkopo?"]
+  - [followup, group-membership, "what about for a group?", "How do I join?"]
+  - [followup, fixed-deposit, "and the fixed one?", "What savings accounts do you offer?"]
+  - [followup, statement-request, "and my statement?", "How do I check my loan balance?"]
+  - [followup, withdraw-flexi, "and how long does it take?", "How do I withdraw my savings?"]
+  - [followup, loan-guarantors, "na wadhamini?", "Naombaje mkopo?"]
+  # --- smalltalk
+  - [smalltalk, "@smalltalk", "hello"]
+  - [smalltalk, "@smalltalk", "Habari"]
+  - [smalltalk, "@smalltalk", "asante sana"]
+  - [smalltalk, "@smalltalk", "thank you so much"]
+  - [smalltalk, "@smalltalk", "mambo vipi"]
+  - [smalltalk, "@smalltalk", "kwaheri"]
+  # --- out of scope: must hand off (near-domain ones are the dangerous ones)
+  - [oos, ~, "Can I get a mortgage to buy a house?"]
+  - [oos, ~, "Can I use my land title as security?"]
+  - [oos, ~, "What is the exchange rate for dollars today?"]
+  - [oos, ~, "How do I buy shares on the Nairobi Securities Exchange?"]
+  - [oos, ~, "Do you offer car insurance?"]
+  - [oos, ~, "Can I send money abroad through the sacco?"]
+  - [oos, ~, "How do I pay my KPLC electricity bill?"]
+  - [oos, ~, "Can I buy airtime from you?"]
+  - [oos, ~, "How do I reset my Safaricom PIN?"]
+  - [oos, ~, "How do I start my own SACCO?"]
+  - [oos, ~, "Is Umoja Sacco profit this year higher than last year?"]
+  - [oos, ~, "Are there any jobs at the sacco?"]
+  - [oos, ~, "What is the weather in Nairobi today?"]
+  - [oos, ~, "Who won the football match yesterday?"]
+  - [oos, ~, "Tell me a joke"]
+  - [oos, ~, "What is the capital of Kenya?"]
+  - [oos, ~, "Give me a recipe for pilau"]
+  - [oos, ~, "Who is the president?"]
+  - [oos, ~, "Naweza kununua simu kwa mkopo wa sacco?"]
+  - [oos, ~, "Hali ya hewa ikoje leo?"]
+  - [oos, ~, "Mnauza ardhi?"]
+  - [oos, ~, "Bei ya unga ni ngapi leo?"]
+  - [oos, ~, "Nina maumivu ya kichwa, nitumie dawa gani?"]
+  - [oos, ~, "Nani alishinda mechi jana?"]
+  - [oos, ~, "Niaje buda, una mechi ya leo?"]
+  - [oos, ~, "Can you write my school essay for me?"]
+  - [oos, ~, "My cow is sick, what should I do?"]
+  - [oos, ~, "How do I register a company with the registrar?"]
+  - [oos, ~, "Kuna bei ya kuuza gari lenu?"]
+  - [oos, ~, "When is the AGM?"]
+  # --- follow-ups that cannot be answered without the previous topic
+  # (added after the first runs; appended at the end so earlier cases keep their dev/test split)
+  - [followup, membership-fee, "how much is it?", "How do I join?"]
+  - [followup, membership-fee, "ni kiasi gani?", "Nataka kujiunga"]
+  - [followup, loan-processing-fee, "na gharama zake?", "Naombaje mkopo?"]
+  - [followup, fixed-deposit, "which one earns interest?", "What savings accounts do you offer?"]
+  - [followup, group-membership, "can my group do it too?", "How do I join?"]
+  - [followup, withdraw-flexi, "and how do I take it out?", "How do I deposit money using M-Pesa?"]

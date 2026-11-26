@@ -1,0 +1,40 @@
+# Small labelled set for kb/afya-clinic.yaml (synthetic). Written once, after the engine and the
+# Umoja Sacco tuning were frozen: nothing here was used to tune the engine, the synonym groups or
+# the threshold. Same format and split rule as eval/umoja-sacco.yaml.
+
+kb: afya-clinic
+as_of: 2026-06-01
+
+cases:
+  - [en, clinic-hours, "What time does the clinic close?"]
+  - [en, clinic-hours, "Are you open on Sunday?"]
+  - [sw, clinic-hours, "Mnafunga saa ngapi jioni?"]
+  - [mixed, clinic-hours, "Opening hours zenu ni gani?"]
+  - [en, book-appointment, "How can I make an appointment?"]
+  - [sw, book-appointment, "Nawezaje kuweka miadi?"]
+  - [mixed, book-appointment, "Naweza book appointment kwa WhatsApp?"]
+  - [en, consultation-fees, "How much does a doctor visit cost?"]
+  - [sw, consultation-fees, "Ada ya daktari ni shilingi ngapi?"]
+  - [en, insurance-accepted, "Do you take SHA?"]
+  - [sw, insurance-accepted, "Mnakubali bima ya SHA?"]
+  - [en, lab-results, "How long until my lab results are ready?"]
+  - [sw, lab-results, "Matokeo ya vipimo yatakuwa tayari lini?"]
+  - [en, child-vaccination, "Can I bring my baby for vaccines?"]
+  - [sw, child-vaccination, "Chanjo za watoto zinatolewa siku gani?"]
+  - [en, location, "Where are you located?"]
+  - [sw, location, "Kliniki iko wapi?"]
+  - [en, pharmacy, "Can I buy medicines at your pharmacy?"]
+  - [en, emergency, "Do you have an ambulance?"]
+  - [en, telehealth, "Can I speak to a doctor on the phone?"]
+  - [typo, consultation-fees, "how much is a consultaion fee"]
+  - [typo, book-appointment, "how to book an apointment"]
+  - [oos, ~, "I have a headache, what should I take?"]
+  - [oos, ~, "Is paracetamol safe with alcohol?"]
+  - [oos, ~, "Do you treat cancer?"]
+  - [oos, ~, "What is the weather in Nairobi today?"]
+  - [oos, ~, "Nina homa na kikohozi, nifanye nini?"]
+  - [oos, ~, "Bei ya unga ni ngapi?"]
+  - [oos, ~, "How do I become a doctor?"]
+  - [oos, ~, "Who won the match yesterday?"]
+  - [smalltalk, "@smalltalk", "hello"]
+  - [smalltalk, "@smalltalk", "asante"]
