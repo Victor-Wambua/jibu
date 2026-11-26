@@ -1,0 +1,743 @@
+# Umoja Sacco is a FICTIONAL organisation. Every name, number, fee, address and code
+# below is synthetic sample data for demonstrating Jibu. Do not rely on any of it.
+
+organisation:
+  id: umoja-sacco
+  name: Umoja Sacco (sample)
+  description: Fictional savings and credit cooperative used to demonstrate Jibu.
+  contact:
+    phone: "0700 000 001"
+    whatsapp: "+254700000001"
+    hours:
+      en: "Mon-Fri 8:00-17:00, Sat 9:00-13:00"
+      sw: "Jumatatu-Ijumaa 8:00-17:00, Jumamosi 9:00-13:00"
+  confidence_threshold: 0.5
+  welcome:
+    en: "Hello! I answer common questions about Umoja Sacco membership, savings and loans. Ask in English or Kiswahili."
+    sw: "Habari! Ninajibu maswali ya kawaida kuhusu uanachama, akiba na mikopo ya Umoja Sacco. Uliza kwa Kiswahili au Kiingereza."
+  starters:
+    - how-to-join
+    - loan-eligibility
+    - office-hours
+    - deposit-mpesa
+
+handoff:
+  en: "I'm not sure I have a reliable answer to that, so I won't guess. I've passed your question to our team. You can also call {phone} or WhatsApp {whatsapp} ({hours})."
+  sw: "Sina hakika kama nina jibu sahihi kwa swali hilo, kwa hivyo sitakisia. Nimepitisha swali lako kwa timu yetu. Unaweza pia kupiga simu {phone} au WhatsApp {whatsapp} ({hours})."
+
+smalltalk:
+  greeting:
+    en: "Hello! Ask me about membership, savings, loans, branches or opening hours."
+    sw: "Habari! Niulize kuhusu uanachama, akiba, mikopo, matawi au saa za kazi."
+  thanks:
+    en: "You're welcome! Ask me anything else about Umoja Sacco."
+    sw: "Karibu! Niulize jambo lingine kuhusu Umoja Sacco."
+  bye:
+    en: "Goodbye! We're here Mon-Sat if you need us."
+    sw: "Kwaheri! Tupo Jumatatu hadi Jumamosi ukituhitaji."
+
+# Words that mean (roughly) the same thing. Each group is expanded at query time, so the
+# customer's "doh", "pesa" or "money" all reach the same entries. Slang goes here, per organisation.
+synonyms:
+  - [loan, loans, mkopo, mikopo, kukopa, kopa, kopesha, borrow, borrowing, credit, advance]
+  - [fee, fees, cost, price, charge, charges, ada, gharama, bei, makato, kiasi]
+  - [money, pesa, cash, fedha, hela, doh, mulla, ganji, cheddar, mshiko, chapaa]
+  - [member, members, membership, mwanachama, wanachama, uanachama, join, jiunga, kujiunga, register, registration, usajili, sajili, enrol, enroll]
+  - [deposit, deposits, save, saving, savings, akiba, weka, kuweka, amana, contribute, contribution, mchango, michango]
+  - [withdraw, withdrawal, withdrawals, toa, kutoa, cashout]
+  - [guarantor, guarantors, mdhamini, wadhamini, dhamini, kudhamini, guarantee, surety]
+  - [interest, riba, rate, rates, kiwango, viwango]
+  - [dividend, dividends, gawio, mgao, profit]
+  - [share, shares, hisa, sharecapital]
+  - [branch, branches, tawi, matawi, office, ofisi, location, located, mahali, address, anwani, directions, wapi]
+  - [hours, saa, opening, open, fungua, mnafungua, funga, mnafunga, closing, close, muda]
+  - [phone, simu, mobile, sim, namba, nambari, call, contact, reach, wasiliana, mawasiliano, piga]
+  - [statement, taarifa, statements]
+  - [balance, salio, bakaa]
+  - [pin, nenosiri, password, siri, forgot, nimesahau, sahau, kusahau, reset]
+  - [repay, repayment, repayments, instalment, instalments, installment, installments, lipa, kulipa, marejesho, rejesho, pay, payment, malipo]
+  - [penalty, penalties, fine, faini, late, kuchelewa, chelewa, overdue, default, arrears]
+  - [school, shule, elimu, education, tuition, karo]
+  - [student, students, mwanafunzi, wanafunzi, youth, vijana, kijana, young, junior, teen, teenager, university, chuo]
+  - [exit, leave, quit, resign, jitoa, kujitoa, kujiondoa, ondoka, close, cancel]
+  - [complaint, complaints, malalamiko, lalamiko, lalamika, kero, dispute, grievance]
+  - [death, die, dies, died, dead, passes, passed, away, fariki, kifo, funeral, bereavement, burial, mazishi, msiba, welfare, pamoja]
+  - [insurance, bima, cover]
+  - [wrong, mistake, error, makosa, kosa, reverse, reversal, refund, rudisha, kurudisha]
+  - [document, documents, requirements, mahitaji, kitambulisho, id, passport, kra]
+  - [apply, application, omba, ombi, maombi, request]
+  - [long, duration, haraka, quickly, fast, speed, days, siku]
+  - [fixed, imara, term]
+  - [maximum, max, biggest, largest, highest, limit, kikomo, upto, juu, zaidi]
+  - [qualify, qualified, eligible, eligibility, stahili, nastahili, vigezo, masharti, criteria, conditions, allowed, ruhusa, kuruhusa]
+  - [owe, owed, debt, deni, outstanding, remaining, salio, balance]
+  - [lend, lending, lent, kopesha, kukopesha]
+  - [kids, children, child, watoto, mtoto, junior, minor]
+  - [month, months, monthly, mwezi]
+  - [process, procedure, steps, utaratibu, hatua, njia, mchakato]
+  - [staff, employee, worker, mfanyakazi, customer, care, huduma, service, someone]
+  - [return, returned, rudisha, back]
+  - [account, accounts, akaunti]
+  - [group, groups, chama, vikundi, kikundi]
+  - [nominee, nextofkin, beneficiary, mrithi, walengwa]
+  - [email, barua, pepe]
+  - [topup, top]
+
+entries:
+  # ---------------------------------------------------------------- membership
+  - id: membership-eligibility
+    tags: [membership, eligibility, uanachama, kujiunga]
+    questions:
+      en:
+        - "Who is eligible for Umoja Sacco membership?"
+        - "Am I eligible to become a member?"
+        - "What are the requirements for membership?"
+        - "Is there an age limit for joining?"
+        - "Can I be a member if I live outside Nairobi?"
+      sw:
+        - "Nani anastahili uanachama wa Umoja Sacco?"
+        - "Je, ninastahili kuwa mwanachama?"
+        - "Masharti ya uanachama ni yapi?"
+        - "Mtu yeyote anaruhusiwa kujiunga?"
+        - "Kuna kikomo cha umri cha kujiunga?"
+    answer:
+      en: "Any Kenyan resident aged 18 or above with a valid national ID or passport can join. Young people aged 16-25 can join through the Umoja Vijana account, and registered groups (chamas) can join as corporate members."
+      sw: "Mkazi yeyote wa Kenya mwenye umri wa miaka 18 au zaidi na kitambulisho halali cha taifa au pasipoti anaweza kujiunga. Vijana wa miaka 16-25 wanaweza kujiunga kupitia akaunti ya Umoja Vijana, na vikundi vilivyosajiliwa (chama) vinaweza kujiunga kama wanachama wa kampuni."
+    follow_ups: [how-to-join, membership-fee, youth-membership]
+
+  - id: how-to-join
+    tags: [membership, join, register, uanachama, kujiunga]
+    questions:
+      en:
+        - "How do I join Umoja Sacco?"
+        - "How can I register as a member?"
+        - "What documents do I need to open an account?"
+        - "What do I bring when I come to sign up?"
+      sw:
+        - "Nawezaje kujiunga na Umoja Sacco?"
+        - "Ni hatua gani za kujisajili kuwa mwanachama?"
+        - "Ni nyaraka gani ninahitaji kufungua akaunti?"
+        - "Nataka kuwa mwanachama, nianzie wapi?"
+        - "Mahitaji ya kujisajili ni yapi?"
+    answer:
+      en: "Fill the membership form online or at any branch and bring: a copy of your national ID or passport, two passport photos, your KRA PIN certificate and your next-of-kin details. Pay the registration fee and your first share capital. Approval takes up to 2 working days."
+      sw: "Jaza fomu ya uanachama mtandaoni au tawini na uje na: nakala ya kitambulisho au pasipoti, picha mbili za pasipoti, cheti cha KRA PIN na maelezo ya jamaa wa karibu. Lipa ada ya usajili na hisa zako za kwanza. Idhini huchukua hadi siku 2 za kazi."
+    follow_ups: [membership-fee, share-capital]
+
+  - id: membership-fee
+    tags: [membership, fee, registration, ada, usajili]
+    questions:
+      en:
+        - "How much is the membership fee?"
+        - "What is the registration fee?"
+        - "How much does it cost to join?"
+      sw:
+        - "Ada ya uanachama ni kiasi gani?"
+        - "Ada ya usajili ni shilingi ngapi?"
+        - "Inagharimu kiasi gani kujiunga?"
+        - "Natakiwa kulipa kiasi gani nikijiunga?"
+    answer:
+      en: "The registration fee is KES 1,000 and it is not refundable. You also need to buy minimum share capital of KES 5,000 (see the share capital question), and save at least KES 1,000 a month."
+      sw: "Ada ya usajili ni KES 1,000 na hairudishwi. Pia unahitaji kununua hisa za angalau KES 5,000, na kuweka akiba ya angalau KES 1,000 kila mwezi."
+    follow_ups: [share-capital, youth-membership]
+
+  - id: youth-membership
+    tags: [membership, youth, students, junior, vijana, wanafunzi]
+    questions:
+      en:
+        - "Is there a membership for students or young people?"
+        - "How much is the fee for youth members?"
+        - "Can I join if I am a university student?"
+      sw:
+        - "Kuna uanachama wa wanafunzi au vijana?"
+        - "Ada ya wanachama vijana ni kiasi gani?"
+        - "Naweza kujiunga kama mwanafunzi wa chuo?"
+    answer:
+      en: "Yes. Umoja Vijana is for ages 16-25 and for students with a valid school or college ID. The registration fee is KES 200, minimum share capital is KES 1,000 and minimum monthly saving is KES 200. Members under 18 need a guardian's ID and a birth certificate."
+      sw: "Ndiyo. Umoja Vijana ni kwa umri wa miaka 16-25 na kwa wanafunzi wenye kitambulisho halali cha shule au chuo. Ada ya usajili ni KES 200, hisa za chini ni KES 1,000 na akiba ya chini kila mwezi ni KES 200. Walio chini ya miaka 18 wanahitaji kitambulisho cha mlezi na cheti cha kuzaliwa."
+    follow_ups: [how-to-join]
+
+  - id: group-membership
+    tags: [membership, group, chama, corporate]
+    questions:
+      en:
+        - "Can our chama or group join as a member?"
+        - "How can a registered group open an account?"
+        - "What do groups need to register?"
+        - "Our self-help group wants to join the sacco"
+      sw:
+        - "Chama chetu kinaweza kujiunga kama mwanachama?"
+        - "Kikundi kilichosajiliwa kinafunguaje akaunti?"
+        - "Vikundi vinahitaji nyaraka gani kujisajili?"
+        - "Chama cha wanawake kinaweza kujisajili?"
+    answer:
+      en: "Yes. A registered group joins as a corporate member. Bring the registration certificate, constitution, minutes approving the application, the officials' IDs and the group's KRA PIN. Fees are the same as for individuals."
+      sw: "Ndiyo. Kikundi kilichosajiliwa hujiunga kama mwanachama wa kampuni. Leta cheti cha usajili, katiba, kumbukumbu za mkutano zinazoidhinisha ombi, vitambulisho vya viongozi na KRA PIN ya kikundi. Ada ni sawa na za watu binafsi."
+
+  - id: share-capital
+    tags: [shares, share capital, hisa]
+    questions:
+      en:
+        - "What is share capital and how much must I pay?"
+        - "Can I withdraw my shares?"
+        - "How many shares do I need to buy?"
+      sw:
+        - "Hisa ni nini na ninapaswa kulipa kiasi gani?"
+        - "Naweza kutoa hisa zangu?"
+        - "Ninahitaji kununua hisa ngapi?"
+        - "Hisa zangu zinarudishwa lini?"
+        - "Naweza kutoa hisa nikiwa mwanachama?"
+    answer:
+      en: "Share capital is your ownership stake. The minimum is KES 5,000, payable at once or in instalments within 3 months. Shares cannot be withdrawn while you are a member; they are refunded when you exit, after any loans are cleared."
+      sw: "Hisa ni umiliki wako katika Sacco. Kiwango cha chini ni KES 5,000, kinaweza kulipwa mara moja au kwa awamu ndani ya miezi 3. Hisa hazitolewi ukiwa mwanachama; hurudishwa unapojitoa, baada ya mikopo kulipwa."
+    follow_ups: [exit-membership]
+
+  # ------------------------------------------------------------------- savings
+  - id: savings-products
+    tags: [savings, accounts, amana, akiba, products]
+    questions:
+      en:
+        - "What savings accounts do you offer?"
+        - "What is the difference between Amana deposits and Akiba Flexi?"
+        - "Do you have a savings account for children?"
+        - "What types of savings are there?"
+        - "Can I open an account for my child?"
+      sw:
+        - "Mna akaunti gani za akiba?"
+        - "Kuna tofauti gani kati ya amana na Akiba Flexi?"
+        - "Mna akaunti ya akiba ya watoto?"
+        - "Naweza kufungulia mtoto wangu akaunti?"
+    answer:
+      en: "We offer: Amana Deposits (long-term, not withdrawable, earn dividends and set your loan limit), Akiba Flexi (withdrawable savings), Watoto Junior (for children under 18, run by a guardian) and Fixed Deposits."
+      sw: "Tuna: Amana (za muda mrefu, hazitolewi, hupata gawio na huamua kikomo cha mkopo wako), Akiba Flexi (akiba inayotolewa), Watoto Junior (kwa watoto walio chini ya miaka 18, inasimamiwa na mlezi) na Amana za Muda Maalum."
+    follow_ups: [fixed-deposit, withdraw-flexi]
+
+  - id: fixed-deposit
+    tags: [savings, fixed deposit, interest, amana ya muda]
+    questions:
+      en:
+        - "Do you have fixed deposit accounts and what interest do they earn?"
+        - "How much interest do I get on a 12 month fixed deposit?"
+        - "What is the minimum for a fixed deposit?"
+      sw:
+        - "Mna amana za muda maalum na riba yake ni ngapi?"
+        - "Riba ya amana ya miezi 12 ni kiasi gani?"
+        - "Kiwango cha chini cha amana ya muda maalum ni kipi?"
+    answer:
+      en: "Yes. Fixed deposits start at KES 50,000. Sample rates: 8% a year for 6 months and 10% a year for 12 months, paid at maturity. Breaking a fixed deposit early forfeits the interest."
+      sw: "Ndiyo. Amana za muda maalum huanzia KES 50,000. Viwango vya mfano: 8% kwa mwaka kwa miezi 6 na 10% kwa mwaka kwa miezi 12, hulipwa mwisho wa muda. Ukivunja amana mapema unapoteza riba."
+
+  - id: deposit-mpesa
+    tags: [deposit, mpesa, paybill, savings, kuweka]
+    questions:
+      en:
+        - "How do I deposit money using M-Pesa?"
+        - "What is the paybill number for savings?"
+        - "How can I pay my monthly savings?"
+        - "How do I send savings through M-Pesa?"
+      sw:
+        - "Naweza kuweka pesa kwa M-Pesa vipi?"
+        - "Nambari ya paybill ya akiba ni ipi?"
+        - "Nalipaje akiba yangu ya kila mwezi?"
+        - "Nitumaje akiba yangu kwa M-Pesa?"
+    answer:
+      en: "Use M-Pesa Paybill 000000 (sample number). Enter your membership number as the account, then the amount. You get an SMS confirmation. You can also deposit at any branch or by bank transfer."
+      sw: "Tumia M-Pesa Paybill 000000 (nambari ya mfano). Weka nambari yako ya uanachama kama akaunti, kisha kiasi. Utapata SMS ya uthibitisho. Pia unaweza kuweka pesa tawini au kwa benki."
+    follow_ups: [deposit-not-reflecting, wrong-paybill]
+
+  - id: deposit-not-reflecting
+    tags: [deposit, mpesa, delay, missing]
+    questions:
+      en:
+        - "I paid by M-Pesa but my deposit is not showing"
+        - "Why has my savings payment not reflected?"
+        - "My money has not appeared in my account"
+      sw:
+        - "Nimelipa kwa M-Pesa lakini amana yangu haionekani"
+        - "Kwa nini malipo yangu ya akiba hayajaonekana?"
+        - "Pesa zangu hazijaingia kwenye akaunti yangu"
+        - "Nimetuma akiba lakini haijaonekana kwenye akaunti"
+        - "Pesa nilizotuma kwa paybill hazijaingia"
+    answer:
+      en: "Most payments show within 30 minutes. If yours does not, send the M-Pesa confirmation message to WhatsApp +254700000001 with your membership number. Staff will trace it and post it, usually the same working day."
+      sw: "Malipo mengi huonekana ndani ya dakika 30. Yakikosa, tuma ujumbe wa uthibitisho wa M-Pesa kwa WhatsApp +254700000001 pamoja na nambari yako ya uanachama. Wafanyakazi watafuatilia na kuyaweka, kwa kawaida siku hiyo hiyo ya kazi."
+
+  - id: wrong-paybill
+    tags: [mpesa, mistake, reversal, wrong account]
+    questions:
+      en:
+        - "I sent money to the wrong account number"
+        - "Can a wrong M-Pesa payment be reversed?"
+        - "How do I get a refund for a payment sent by mistake?"
+      sw:
+        - "Nilituma pesa kwa nambari ya akaunti isiyo sahihi"
+        - "Malipo ya M-Pesa yaliyokosewa yanaweza kurudishwa?"
+        - "Naombaje kurudishiwa pesa nilizotuma kimakosa?"
+    answer:
+      en: "Contact customer care within 48 hours with the M-Pesa message. We can move money that landed in another Umoja account or in our suspense account. Payments sent to other organisations must be reversed by that organisation or by Safaricom."
+      sw: "Wasiliana na huduma kwa wateja ndani ya saa 48 ukiwa na ujumbe wa M-Pesa. Tunaweza kuhamisha pesa zilizoingia akaunti nyingine ya Umoja au akaunti yetu ya muda. Malipo yaliyotumwa kwa mashirika mengine lazima yarudishwe na shirika hilo au Safaricom."
+
+  - id: withdraw-flexi
+    tags: [withdrawal, savings, flexi, kutoa]
+    questions:
+      en:
+        - "How do I withdraw my savings?"
+        - "How long does it take to withdraw from Akiba Flexi?"
+        - "Can I withdraw my Amana deposits?"
+      sw:
+        - "Nawezaje kutoa akiba yangu?"
+        - "Inachukua muda gani kutoa pesa kutoka Akiba Flexi?"
+        - "Naweza kutoa amana zangu?"
+        - "Nitatoa pesa zangu za akiba vipi?"
+    answer:
+      en: "Akiba Flexi can be withdrawn by USSD or at a branch. Money is sent to your registered M-Pesa number within 24 hours; keep a minimum balance of KES 500. Amana Deposits cannot be withdrawn until you exit the Sacco."
+      sw: "Akiba Flexi inaweza kutolewa kwa USSD au tawini. Pesa hutumwa kwenye namba yako ya M-Pesa iliyosajiliwa ndani ya saa 24; acha salio la angalau KES 500. Amana haziwezi kutolewa hadi ujitoe kwenye Sacco."
+
+  # --------------------------------------------------------------------- loans
+  - id: loan-types
+    tags: [loans, products, mkopo, mikopo]
+    questions:
+      en:
+        - "What types of loans do you offer?"
+        - "Which loans are available to members?"
+        - "Do you give business loans?"
+        - "What kinds of loans can I get?"
+      sw:
+        - "Mna aina gani za mikopo?"
+        - "Ni mikopo gani inapatikana kwa wanachama?"
+        - "Mnatoa mikopo ya biashara?"
+        - "Aina za mikopo yenu ni zipi?"
+    answer:
+      en: "We offer four loans: Development (up to 36 months), Emergency (up to KES 50,000, 6 months), School Fees (12 months, paid to the school) and Biashara for business (up to 24 months)."
+      sw: "Tunatoa mikopo minne: Maendeleo (hadi miezi 36), Dharura (hadi KES 50,000, miezi 6), Karo (miezi 12, hulipwa moja kwa moja shuleni) na Biashara (hadi miezi 24)."
+    follow_ups: [loan-eligibility, loan-interest, loan-limit]
+
+  - id: loan-eligibility
+    tags: [loans, eligibility, mkopo, masharti]
+    questions:
+      en:
+        - "How do I qualify for a loan?"
+        - "Who is eligible to get a loan?"
+        - "What are the conditions for borrowing?"
+        - "Can a new member get a loan?"
+      sw:
+        - "Nitastahilije kupata mkopo?"
+        - "Nani anastahili kupata mkopo?"
+        - "Masharti ya kukopa ni yapi?"
+        - "Mwanachama mpya anaweza kupata mkopo?"
+    answer:
+      en: "You qualify after 6 months of membership with 6 consecutive monthly contributions, fully paid share capital and no loan in default. Amounts depend on your deposits."
+      sw: "Unastahili baada ya miezi 6 ya uanachama ukiwa umeweka akiba kwa miezi 6 mfululizo, hisa zimelipwa kikamilifu na huna mkopo uliochelewa. Kiasi kinategemea amana zako."
+    follow_ups: [loan-limit, loan-application]
+
+  - id: loan-limit
+    tags: [loans, limit, maximum, kikomo]
+    questions:
+      en:
+        - "How much can I borrow?"
+        - "What is the maximum loan amount?"
+        - "How is my loan limit calculated?"
+      sw:
+        - "Naweza kukopa kiasi gani?"
+        - "Kiwango cha juu cha mkopo ni kipi?"
+        - "Kikomo cha mkopo wangu kinakokotolewaje?"
+        - "Mnaweza kunikopesha kiasi gani?"
+    answer:
+      en: "Development and Biashara loans go up to 3 times your Amana deposits. School Fees loans go up to 2 times. Emergency loans are capped at KES 50,000. Your current limit is shown on the USSD menu."
+      sw: "Mikopo ya Maendeleo na Biashara hufika mara 3 ya amana zako. Mkopo wa Karo hufika mara 2. Mkopo wa Dharura una kikomo cha KES 50,000. Kikomo chako cha sasa kinaonekana kwenye menyu ya USSD."
+    follow_ups: [loan-guarantors, loan-interest]
+
+  - id: loan-interest
+    tags: [loans, interest, riba, rate]
+    questions:
+      en:
+        - "What is the interest rate on loans?"
+        - "How much interest do you charge?"
+        - "Is the interest on reducing balance?"
+      sw:
+        - "Riba ya mikopo ni asilimia ngapi?"
+        - "Mnatoza riba ya kiasi gani?"
+        - "Riba hutozwa kwa salio linalopungua?"
+    answer:
+      en: "Interest is 1% a month on the reducing balance for Development and School Fees loans, 1.2% for Biashara and 1.5% for Emergency loans. These are sample rates."
+      sw: "Riba ni 1% kwa mwezi kwa salio linalopungua kwa mikopo ya Maendeleo na Karo, 1.2% kwa Biashara na 1.5% kwa Dharura. Hivi ni viwango vya mfano."
+    follow_ups: [loan-processing-fee, loan-early-repayment]
+
+  - id: loan-processing-fee
+    tags: [loans, fee, processing, ada]
+    questions:
+      en:
+        - "How much is the loan processing fee?"
+        - "Are there charges when I take a loan?"
+        - "Do you deduct any fees from the loan amount?"
+      sw:
+        - "Ada ya kushughulikia mkopo ni kiasi gani?"
+        - "Kuna makato ninapochukua mkopo?"
+        - "Mnakata ada yoyote kwenye kiasi cha mkopo?"
+    answer:
+      en: "The processing fee is 1% of the loan (minimum KES 500, maximum KES 5,000), plus 0.5% loan insurance. They are deducted when the loan is paid out."
+      sw: "Ada ya kushughulikia ni 1% ya mkopo (angalau KES 500, kiwango cha juu KES 5,000), pamoja na bima ya mkopo ya 0.5%. Hukatwa mkopo unapotolewa."
+    follow_ups: [loan-insurance]
+
+  - id: promo-school-fees
+    tags: [loans, school fees, promotion, elimu, karo]
+    valid_from: 2026-01-01
+    valid_until: 2027-06-30
+    questions:
+      en:
+        - "Is there a school fees loan promotion?"
+        - "Do you have any loan offers at the moment?"
+        - "Is the processing fee waived for school fees loans?"
+        - "Are there any offers on school fees loans?"
+      sw:
+        - "Kuna ofa ya mkopo wa karo za shule?"
+        - "Mna ofa zozote za mikopo kwa sasa?"
+        - "Ada ya kushughulikia mkopo wa karo imeondolewa?"
+    answer:
+      en: "Yes, the Elimu offer waives the processing fee on School Fees loans applied for until 30 June 2027. Insurance is still charged."
+      sw: "Ndiyo, ofa ya Elimu inaondoa ada ya kushughulikia mikopo ya Karo inayoombwa hadi tarehe 30 Juni 2027. Bima bado inatozwa."
+
+  - id: loan-application
+    tags: [loans, application, steps, ombi, omba]
+    questions:
+      en:
+        - "How do I apply for a loan?"
+        - "What are the steps to get a loan?"
+        - "What documents do I need for a loan application?"
+        - "What is the process of borrowing from the sacco?"
+      sw:
+        - "Naombaje mkopo?"
+        - "Hatua za kupata mkopo ni zipi?"
+        - "Ni nyaraka gani zinahitajika kuomba mkopo?"
+        - "Utaratibu wa kuomba mkopo ni upi?"
+    answer:
+      en: "Fill the loan form online or at a branch. Attach your latest 3 months of payslips (employed) or bank/M-Pesa statements (business), and have your guarantors sign if needed. The loan committee reviews it, then the money goes to your account or M-Pesa."
+      sw: "Jaza fomu ya mkopo mtandaoni au tawini. Ambatisha hati za mshahara za miezi 3 ya mwisho (walioajiriwa) au taarifa za benki/M-Pesa (wafanyabiashara), na wadhamini wasaini ikihitajika. Kamati ya mikopo hukagua, kisha pesa huingia kwenye akaunti yako au M-Pesa."
+    follow_ups: [loan-guarantors, loan-processing-time]
+
+  - id: loan-guarantors
+    tags: [loans, guarantors, wadhamini, mdhamini]
+    questions:
+      en:
+        - "Do I need guarantors for a loan?"
+        - "How many guarantors are required?"
+        - "Who can guarantee my loan?"
+      sw:
+        - "Je, ninahitaji wadhamini kupata mkopo?"
+        - "Wadhamini wanaohitajika ni wangapi?"
+        - "Nani anaweza kunidhamini kwa mkopo?"
+        - "Rafiki yangu anaweza kunidhamini?"
+        - "Nahitaji mdhamini kupata mkopo?"
+    answer:
+      en: "Loans up to your own deposits need no guarantor. Above that you need 2 guarantors who are members in good standing, each with enough free deposits to cover their share."
+      sw: "Mikopo hadi kiasi cha amana zako hauhitaji mdhamini. Juu ya hapo unahitaji wadhamini 2 ambao ni wanachama wasio na deni lililochelewa, kila mmoja akiwa na amana huru za kutosha."
+
+  - id: loan-processing-time
+    tags: [loans, processing, time, muda]
+    questions:
+      en:
+        - "How long does it take to get a loan?"
+        - "When will my loan be disbursed?"
+        - "How fast is the emergency loan?"
+      sw:
+        - "Mkopo huchukua muda gani kupatikana?"
+        - "Mkopo wangu utatolewa lini?"
+        - "Mkopo wa dharura unatolewa haraka kiasi gani?"
+    answer:
+      en: "Emergency loans are paid within 24 hours of a complete application. Other loans take 3-5 working days; the loan committee meets on Tuesdays and Thursdays."
+      sw: "Mikopo ya Dharura hulipwa ndani ya saa 24 baada ya ombi kamili. Mikopo mingine huchukua siku 3-5 za kazi; kamati ya mikopo hukutana Jumanne na Alhamisi."
+
+  - id: loan-repayment
+    tags: [loans, repayment, paybill, marejesho]
+    questions:
+      en:
+        - "How do I repay my loan?"
+        - "Can I pay my loan through M-Pesa?"
+        - "When is my loan instalment due?"
+        - "Where do I pay my loan each month?"
+      sw:
+        - "Nalipaje mkopo wangu?"
+        - "Naweza kulipa mkopo kupitia M-Pesa?"
+        - "Marejesho ya mkopo yanafaa kulipwa lini?"
+    answer:
+      en: "Pay by M-Pesa Paybill 000000 (sample) using your loan number as the account, by employer check-off or by standing order. Instalments are due by the 5th of every month."
+      sw: "Lipa kwa M-Pesa Paybill 000000 (mfano) ukitumia nambari ya mkopo kama akaunti, kwa makato ya mwajiri au kwa agizo la kudumu. Marejesho hulipwa kabla ya tarehe 5 ya kila mwezi."
+    follow_ups: [loan-late-penalty, loan-balance]
+
+  - id: loan-early-repayment
+    tags: [loans, early repayment, malipo ya mapema]
+    questions:
+      en:
+        - "Can I clear my loan early?"
+        - "Is there a penalty for paying off a loan early?"
+        - "Can I make extra loan payments?"
+        - "Do I pay extra if I finish my loan early?"
+      sw:
+        - "Naweza kulipa mkopo wangu mapema?"
+        - "Kuna faini ya kulipa mkopo mapema?"
+        - "Naweza kulipa zaidi ya marejesho ya kila mwezi?"
+    answer:
+      en: "Yes. There is no early repayment penalty and you only pay interest up to the day you clear the loan."
+      sw: "Ndiyo. Hakuna faini ya kulipa mapema na unalipa riba hadi siku unayomaliza mkopo tu."
+
+  - id: loan-late-penalty
+    tags: [loans, penalty, late payment, faini, arrears]
+    questions:
+      en:
+        - "What happens if I miss a loan payment?"
+        - "Is there a penalty for late repayment?"
+        - "What if I cannot pay my loan on time?"
+        - "I have failed to pay my loan this month"
+      sw:
+        - "Nini hutokea nikikosa kulipa mkopo?"
+        - "Kuna faini ya kuchelewa kulipa mkopo?"
+        - "Nifanye nini nikishindwa kulipa mkopo kwa wakati?"
+    answer:
+      en: "After a 7-day grace period a penalty of 5% of the overdue instalment is charged each month. After 90 days your guarantors are notified. If you are struggling, contact us early to talk about restructuring."
+      sw: "Baada ya siku 7 za nyongeza, faini ya 5% ya marejesho yaliyochelewa hutozwa kila mwezi. Baada ya siku 90 wadhamini wako wanaarifiwa. Ukipata shida, wasiliana nasi mapema kujadili kupanga upya mkopo."
+
+  - id: loan-topup
+    tags: [loans, top-up, topup, refinance]
+    questions:
+      en:
+        - "Can I top up my existing loan?"
+        - "Can I take a second loan while I still have one?"
+        - "Can I get another loan before I finish paying the first?"
+        - "Can I get an additional amount on my existing loan?"
+      sw:
+        - "Naweza kuongeza mkopo wangu wa sasa?"
+        - "Naweza kuchukua mkopo wa pili nikiwa bado na mmoja?"
+        - "Naweza kupata mkopo mwingine kabla ya kumaliza wa kwanza?"
+        - "Naweza kuchukua mkopo mwingine?"
+    answer:
+      en: "Yes, a top-up is possible once you have repaid 50% of the current loan and have no arrears. The new loan clears the old balance first."
+      sw: "Ndiyo, kuongeza mkopo kunawezekana ukishalipa 50% ya mkopo wa sasa na huna malimbikizo. Mkopo mpya hulipa salio la zamani kwanza."
+
+  - id: loan-insurance
+    tags: [loans, insurance, bima, death]
+    questions:
+      en:
+        - "Is my loan insured?"
+        - "What happens to my loan if I die?"
+        - "What does loan insurance cover?"
+      sw:
+        - "Mkopo wangu una bima?"
+        - "Nini hutokea kwa mkopo wangu nikifariki?"
+        - "Bima ya mkopo inagharamia nini?"
+        - "Bima ya mkopo ni nini?"
+    answer:
+      en: "Every loan carries insurance of 0.5% of the amount. It clears the outstanding balance if the borrower dies or becomes permanently disabled, so your family is not left with the debt."
+      sw: "Kila mkopo una bima ya 0.5% ya kiasi. Hulipa salio lililobaki mkopaji akifariki au akipata ulemavu wa kudumu, ili familia yako isiachiwe deni."
+
+  - id: loan-balance
+    tags: [loans, balance, ussd, salio]
+    questions:
+      en:
+        - "How do I check my loan balance?"
+        - "How can I see my savings balance?"
+        - "How do I check my account balance?"
+      sw:
+        - "Naangaliaje salio la mkopo wangu?"
+        - "Naweza kuona salio la akiba yangu vipi?"
+        - "Nafanyaje kuangalia salio la akaunti yangu?"
+        - "Naangalia salio la akaunti kwa simu vipi?"
+    answer:
+      en: "Dial *000# (sample USSD code) and choose Balances, or send BAL to the Sacco shortcode shown on your membership card. Balances are free."
+      sw: "Piga *000# (msimbo wa mfano wa USSD) kisha chagua Salio, au tuma BAL kwa nambari fupi iliyo kwenye kadi yako ya uanachama. Kuangalia salio ni bure."
+
+  # ----------------------------------------------------------------- statements
+  - id: statement-request
+    tags: [statement, account, taarifa]
+    questions:
+      en:
+        - "How do I get my account statement?"
+        - "Can I get a statement for my loan?"
+        - "Can you email me my savings statement?"
+        - "I need a statement to take to the bank"
+      sw:
+        - "Nawezaje kupata taarifa ya akaunti yangu?"
+        - "Naweza kupata taarifa ya mkopo wangu?"
+        - "Mnaweza kunitumia taarifa ya akiba yangu kwa barua pepe?"
+        - "Ninapataje statement ya akaunti?"
+    answer:
+      en: "Request a statement by email, from customer care or at a branch. One emailed statement a month is free; a printed statement at the branch costs KES 200."
+      sw: "Omba taarifa kupitia barua pepe, huduma kwa wateja au tawini. Taarifa moja kwa barua pepe kila mwezi ni bure; taarifa iliyochapishwa tawini ni KES 200."
+
+  # ------------------------------------------------------------------ dividends
+  - id: dividends
+    tags: [dividends, gawio, agm, shares]
+    questions:
+      en:
+        - "When are dividends paid?"
+        - "How much dividend will I earn?"
+        - "How are dividends calculated?"
+      sw:
+        - "Gawio hulipwa lini?"
+        - "Nitapata gawio la kiasi gani?"
+        - "Gawio hukokotolewaje?"
+        - "Gawio hulipwa mwezi gani?"
+    answer:
+      en: "The dividend rate is declared by members at the Annual General Meeting, usually in April, and paid by 31 May to your account or M-Pesa. It is calculated on your average deposits and shares for the year. The 2025 sample rate was 9%."
+      sw: "Kiwango cha gawio hutangazwa na wanachama kwenye Mkutano Mkuu wa Mwaka, kwa kawaida Aprili, na hulipwa kufikia tarehe 31 Mei kwenye akaunti au M-Pesa yako. Hukokotolewa kwa wastani wa amana na hisa zako za mwaka. Kiwango cha mfano cha 2025 kilikuwa 9%."
+
+  - id: agm-2026
+    tags: [agm, meeting, mkutano]
+    valid_from: 2026-03-01
+    valid_until: 2026-04-30
+    questions:
+      en:
+        - "When is the AGM this year?"
+        - "Where will the annual general meeting be held?"
+        - "What is the date of the members' meeting?"
+      sw:
+        - "Mkutano mkuu wa mwaka utakuwa lini?"
+        - "Mkutano mkuu utafanyika wapi?"
+        - "Tarehe ya mkutano wa wanachama ni ipi?"
+    answer:
+      en: "The 2026 AGM is on Saturday 18 April 2026 at 10:00 at Umoja Gardens (sample venue). Bring your national ID."
+      sw: "Mkutano Mkuu wa 2026 ni Jumamosi tarehe 18 Aprili 2026 saa 4:00 asubuhi katika Umoja Gardens (ukumbi wa mfano). Leta kitambulisho chako."
+
+  # ------------------------------------------------------------- office & contact
+  - id: office-hours
+    tags: [hours, opening, time, saa]
+    questions:
+      en:
+        - "What time do you open?"
+        - "What are your opening hours?"
+        - "Are you open on Saturdays?"
+        - "What days are you open?"
+      sw:
+        - "Mnafungua saa ngapi?"
+        - "Saa zenu za kazi ni zipi?"
+        - "Mnafungua Jumamosi?"
+        - "Mko wazi siku zipi?"
+    answer:
+      en: "Our branches are open Monday to Friday 8:00-17:00 and Saturday 9:00-13:00. We are closed on Sundays and public holidays. USSD and Paybill work 24 hours."
+      sw: "Matawi yetu yako wazi Jumatatu hadi Ijumaa saa 8:00-17:00 na Jumamosi saa 9:00-13:00. Tumefunga Jumapili na siku za sikukuu. USSD na Paybill zinafanya kazi saa 24."
+
+  - id: branch-locations
+    tags: [branch, location, address, tawi, anwani]
+    questions:
+      en:
+        - "Where are your branches?"
+        - "What is your head office address?"
+        - "Do you have a branch in Nakuru?"
+        - "Do you have any branch near Kisumu?"
+      sw:
+        - "Matawi yenu yako wapi?"
+        - "Anwani ya ofisi kuu ni ipi?"
+        - "Mna tawi Nakuru?"
+        - "Mna tawi karibu na Kisumu?"
+    answer:
+      en: "Head office: Umoja House, Moi Avenue, Nairobi. Branches: Nakuru (Kenyatta Avenue) and Kisumu (Oginga Odinga Street). All addresses are sample data."
+      sw: "Ofisi kuu: Umoja House, Moi Avenue, Nairobi. Matawi: Nakuru (Kenyatta Avenue) na Kisumu (Oginga Odinga Street). Anwani zote ni za mfano."
+
+  - id: contact-customer-care
+    tags: [contact, phone, email, whatsapp, mawasiliano]
+    questions:
+      en:
+        - "How can I contact customer care?"
+        - "What is your phone number?"
+        - "What is your email address?"
+      sw:
+        - "Naweza kuwasiliana vipi na huduma kwa wateja?"
+        - "Nambari yenu ya simu ni ipi?"
+        - "Barua pepe yenu ni ipi?"
+        - "Nawezaje kuwapata wafanyakazi?"
+    answer:
+      en: "Call 0700 000 001, WhatsApp +254700000001 or email info@umoja-sacco.example (all sample contacts). We reply within one working day."
+      sw: "Piga 0700 000 001, WhatsApp +254700000001 au tuma barua pepe info@umoja-sacco.example (mawasiliano yote ni ya mfano). Tunajibu ndani ya siku moja ya kazi."
+
+  - id: complaints
+    tags: [complaints, feedback, malalamiko]
+    questions:
+      en:
+        - "How do I make a complaint?"
+        - "Where can I report poor service?"
+        - "What if my complaint is not resolved?"
+      sw:
+        - "Nawasilishaje malalamiko?"
+        - "Naweza kuripoti huduma mbaya wapi?"
+        - "Itakuwaje malalamiko yangu yasipotatuliwa?"
+        - "Nipeleke wapi malalamiko yangu?"
+    answer:
+      en: "Send your complaint to complaints@umoja-sacco.example or any branch. We acknowledge it in 2 working days and resolve it within 14 days. If it is still unresolved, ask for it to be escalated to the Manager and then to the Sacco regulator."
+      sw: "Tuma malalamiko yako kwa complaints@umoja-sacco.example au tawi lolote. Tunathibitisha kupokea ndani ya siku 2 za kazi na kutatua ndani ya siku 14. Yasipotatuliwa, omba yapelekwe kwa Meneja kisha kwa mdhibiti wa Sacco."
+
+  # ------------------------------------------------------------- account services
+  - id: change-phone-number
+    tags: [phone, account, update, simu]
+    questions:
+      en:
+        - "How do I change my phone number on my account?"
+        - "I lost my SIM card, how do I update my number?"
+        - "Can I update my contact details?"
+      sw:
+        - "Nabadilishaje namba yangu ya simu kwenye akaunti?"
+        - "Nimepoteza laini yangu, nasasishaje namba yangu?"
+        - "Naweza kubadilisha maelezo yangu ya mawasiliano?"
+        - "Nimebadilisha laini, nasasishaje namba yangu?"
+    answer:
+      en: "Visit any branch with your national ID to change your registered number, or email a signed request with a copy of your ID. For your safety we do not change numbers over chat or phone. It takes up to 24 hours."
+      sw: "Tembelea tawi lolote na kitambulisho chako kubadilisha namba iliyosajiliwa, au tuma ombi lililosainiwa kwa barua pepe pamoja na nakala ya kitambulisho. Kwa usalama wako hatubadilishi namba kwa gumzo au simu. Huchukua hadi saa 24."
+
+  - id: update-nominee
+    tags: [nominee, next of kin, beneficiary, walengwa]
+    questions:
+      en:
+        - "How do I change my next of kin?"
+        - "How can I add a beneficiary to my account?"
+        - "Can I update my nominee details?"
+      sw:
+        - "Nabadilishaje jamaa wangu wa karibu?"
+        - "Naweza kuongeza mrithi kwenye akaunti yangu?"
+        - "Naweza kusasisha maelezo ya walengwa wangu?"
+    answer:
+      en: "Fill a nominee form at any branch and attach a copy of the nominee's ID or birth certificate. You can name up to 3 nominees and set each one's percentage."
+      sw: "Jaza fomu ya walengwa tawini na uambatishe nakala ya kitambulisho au cheti cha kuzaliwa cha mlengwa. Unaweza kutaja walengwa hadi 3 na kuweka asilimia ya kila mmoja."
+
+  - id: reset-pin
+    tags: [pin, ussd, password, reset, siri]
+    questions:
+      en:
+        - "I forgot my USSD PIN, how do I reset it?"
+        - "How can I change my PIN?"
+        - "I cannot log in to my account"
+      sw:
+        - "Nimesahau PIN yangu ya USSD, naibadilishaje?"
+        - "Naweza kubadilisha PIN yangu vipi?"
+        - "Siwezi kuingia kwenye akaunti yangu"
+    answer:
+      en: "Dial *000# (sample code), choose Forgot PIN and enter the one-time code sent to your registered number. If you no longer have that number, visit a branch with your ID. Staff will never ask for your PIN."
+      sw: "Piga *000# (msimbo wa mfano), chagua Nimesahau PIN kisha uweke nambari ya siri ya mara moja iliyotumwa kwenye namba yako iliyosajiliwa. Ukikosa namba hiyo, tembelea tawi ukiwa na kitambulisho. Wafanyakazi hawataomba PIN yako kamwe."
+
+  - id: exit-membership
+    tags: [exit, membership, leave, kujitoa]
+    questions:
+      en:
+        - "How do I leave the Sacco?"
+        - "How do I withdraw my membership?"
+        - "What happens to my money when I exit?"
+        - "When will I be refunded if I quit?"
+      sw:
+        - "Najitoaje kwenye Sacco?"
+        - "Naondoaje uanachama wangu?"
+        - "Pesa zangu zinakuwaje nikijitoa?"
+    answer:
+      en: "Give written notice of 3 months. Any loans must be cleared first. Your deposits and shares are refunded within 60 days of the notice period ending, less an exit fee of KES 500."
+      sw: "Toa notisi ya maandishi ya miezi 3. Mikopo yoyote lazima ilipwe kwanza. Amana na hisa zako hurudishwa ndani ya siku 60 baada ya notisi kuisha, ukikatwa ada ya kujitoa ya KES 500."
+
+  - id: welfare-funeral
+    tags: [welfare, funeral, death, bereavement, msiba]
+    questions:
+      en:
+        - "Do you have a welfare or funeral benefit?"
+        - "What support does the Sacco give when a member dies?"
+        - "How do I claim bereavement support?"
+      sw:
+        - "Mna msaada wa mazishi au ustawi?"
+        - "Sacco hutoa msaada gani mwanachama akifariki?"
+        - "Naombaje msaada wa msiba?"
+    answer:
+      en: "Umoja Pamoja Welfare costs KES 500 a month and is optional. It pays KES 100,000 on a member's death and KES 50,000 for a spouse or child. Claims are filed within 30 days with a death certificate."
+      sw: "Umoja Pamoja Welfare ni KES 500 kwa mwezi na ni hiari. Hulipa KES 100,000 mwanachama akifariki na KES 50,000 kwa mwenzi au mtoto. Madai yawasilishwe ndani ya siku 30 pamoja na cheti cha kifo."

@@ -1,0 +1,205 @@
+# Afya Bora Clinic is a FICTIONAL clinic. All details below are synthetic sample data.
+# It exists to show that Jibu works with a different organisation's knowledge base, and
+# that it declines medical-advice questions instead of guessing.
+
+organisation:
+  id: afya-clinic
+  name: Afya Bora Clinic (sample)
+  description: Fictional outpatient clinic used to demonstrate Jibu.
+  contact:
+    phone: "0700 000 010"
+    whatsapp: "+254700000010"
+    hours:
+      en: "Mon-Sat 7:30-19:00, Sun 9:00-13:00"
+      sw: "Jumatatu-Jumamosi 7:30-19:00, Jumapili 9:00-13:00"
+  confidence_threshold: 0.5
+  welcome:
+    en: "Hello! I can answer questions about our clinic hours, appointments, fees and services. I cannot give medical advice."
+    sw: "Habari! Ninaweza kujibu maswali kuhusu saa za kliniki, miadi, ada na huduma zetu. Siwezi kutoa ushauri wa kitabibu."
+  starters:
+    - clinic-hours
+    - book-appointment
+    - consultation-fees
+
+handoff:
+  en: "I don't have a reliable answer to that, and I can't give medical advice. I've passed your question to our staff. Please call {phone} ({hours}). For an emergency call 999 or 112."
+  sw: "Sina jibu la kuaminika kwa hilo, na siwezi kutoa ushauri wa kitabibu. Nimepitisha swali lako kwa wafanyakazi wetu. Tafadhali piga {phone} ({hours}). Kwa dharura piga 999 au 112."
+
+synonyms:
+  - [doctor, daktari, clinician, madaktari, doctors]
+  - [fee, fees, cost, price, charge, charges, ada, gharama, bei, kiasi, malipo]
+  - [hours, saa, opening, open, fungua, mnafungua, close, funga, muda]
+  - [appointment, appointments, booking, book, miadi, weka, kuweka]
+  - [insurance, bima, sha, nhif, cover]
+  - [lab, laboratory, maabara, test, tests, vipimo, kipimo, results, matokeo]
+  - [vaccine, vaccines, vaccination, immunisation, immunization, chanjo]
+  - [child, children, kids, mtoto, watoto, baby, mtoto]
+  - [pharmacy, dawa, medicine, medicines, drugs, famasia]
+  - [emergency, dharura, ambulance]
+  - [location, address, anwani, directions, mahali, wapi, located]
+
+entries:
+  - id: clinic-hours
+    tags: [hours, opening, saa]
+    questions:
+      en:
+        - "What are your opening hours?"
+        - "What time does the clinic open?"
+        - "Are you open on Sundays?"
+      sw:
+        - "Saa zenu za kazi ni zipi?"
+        - "Kliniki inafunguliwa saa ngapi?"
+        - "Mnafungua Jumapili?"
+    answer:
+      en: "We are open Monday to Saturday 7:30-19:00 and Sunday 9:00-13:00. The pharmacy and lab close 30 minutes earlier."
+      sw: "Tuko wazi Jumatatu hadi Jumamosi saa 7:30-19:00 na Jumapili saa 9:00-13:00. Famasia na maabara hufunga nusu saa mapema."
+
+  - id: book-appointment
+    tags: [appointment, booking, miadi]
+    questions:
+      en:
+        - "How do I book an appointment?"
+        - "Can I make an appointment on WhatsApp?"
+        - "Do I need an appointment to see a doctor?"
+      sw:
+        - "Naweza kuweka miadi vipi?"
+        - "Naweza kuweka miadi kupitia WhatsApp?"
+        - "Je, ninahitaji miadi kumwona daktari?"
+    answer:
+      en: "Call or WhatsApp +254700000010 with your name, preferred day and the reason for the visit. Walk-ins are welcome, but booked patients are seen first."
+      sw: "Piga simu au tuma WhatsApp +254700000010 ukitaja jina lako, siku unayopendelea na sababu ya ziara. Wanaofika bila miadi wanakaribishwa, lakini waliopanga miadi huhudumiwa kwanza."
+
+  - id: consultation-fees
+    tags: [fees, consultation, ada]
+    questions:
+      en:
+        - "How much is a consultation?"
+        - "What does it cost to see a doctor?"
+        - "What are your fees?"
+      sw:
+        - "Ada ya kumwona daktari ni kiasi gani?"
+        - "Inagharimu kiasi gani kumwona daktari?"
+        - "Ada zenu ni zipi?"
+    answer:
+      en: "A general consultation is KES 800 and a specialist consultation is KES 2,000 (sample prices). Lab tests and medicines are charged separately."
+      sw: "Ada ya daktari wa kawaida ni KES 800 na daktari bingwa ni KES 2,000 (bei za mfano). Vipimo na dawa hulipiwa tofauti."
+
+  - id: insurance-accepted
+    tags: [insurance, sha, bima]
+    questions:
+      en:
+        - "Do you accept SHA or insurance?"
+        - "Which insurance covers do you take?"
+        - "Can I pay with my medical insurance?"
+      sw:
+        - "Mnakubali SHA au bima?"
+        - "Mnapokea bima za afya zipi?"
+        - "Naweza kulipa kwa bima yangu ya matibabu?"
+    answer:
+      en: "We accept SHA and these sample insurers: Jubilee-Sample, Madison-Sample and AAR-Sample. Bring your card and national ID. Co-payments depend on your plan."
+      sw: "Tunakubali SHA na bima hizi za mfano: Jubilee-Sample, Madison-Sample na AAR-Sample. Leta kadi yako na kitambulisho. Malipo ya ziada hutegemea mpango wako."
+
+  - id: lab-results
+    tags: [lab, results, vipimo]
+    questions:
+      en:
+        - "How long do lab results take?"
+        - "Where do I collect my test results?"
+        - "Can you send my results on WhatsApp?"
+      sw:
+        - "Matokeo ya vipimo huchukua muda gani?"
+        - "Nachukua matokeo ya vipimo wapi?"
+        - "Mnaweza kunitumia matokeo kwa WhatsApp?"
+    answer:
+      en: "Most results are ready in 2-4 hours; some take 2 days. Collect them at the lab desk with your ID, or ask the lab to send them to your registered number."
+      sw: "Matokeo mengi huwa tayari baada ya saa 2-4; mengine huchukua siku 2. Yachukue kwenye dawati la maabara ukiwa na kitambulisho, au uombe yatumwe kwenye namba yako iliyosajiliwa."
+
+  - id: child-vaccination
+    tags: [vaccination, children, chanjo]
+    questions:
+      en:
+        - "Do you vaccinate children?"
+        - "When can I bring my baby for immunisation?"
+        - "Is the child vaccination free?"
+      sw:
+        - "Mnatoa chanjo kwa watoto?"
+        - "Naweza kumleta mtoto wangu kwa chanjo lini?"
+        - "Chanjo ya watoto ni bure?"
+    answer:
+      en: "Yes. Child immunisation runs Monday to Friday 8:00-15:00. Bring the child's health booklet. Routine government-schedule vaccines are free; optional private vaccines are charged."
+      sw: "Ndiyo. Chanjo za watoto hutolewa Jumatatu hadi Ijumaa saa 8:00-15:00. Leta kitabu cha afya cha mtoto. Chanjo za kawaida za serikali ni bure; chanjo za hiari hulipiwa."
+
+  - id: location
+    tags: [location, address, anwani]
+    questions:
+      en:
+        - "Where is the clinic located?"
+        - "What is your address?"
+        - "How do I get to Afya Bora Clinic?"
+      sw:
+        - "Kliniki iko wapi?"
+        - "Anwani yenu ni ipi?"
+        - "Nafikaje kwenye Afya Bora Clinic?"
+    answer:
+      en: "Afya Bora Clinic, 2nd floor, Sample Plaza, Ngong Road, Nairobi (sample address). There is free parking behind the building."
+      sw: "Afya Bora Clinic, ghorofa ya 2, Sample Plaza, Barabara ya Ngong, Nairobi (anwani ya mfano). Kuna maegesho ya bure nyuma ya jengo."
+
+  - id: pharmacy
+    tags: [pharmacy, medicine, dawa]
+    questions:
+      en:
+        - "Do you have a pharmacy?"
+        - "Can I buy medicine at the clinic?"
+        - "Is the pharmacy open on weekends?"
+      sw:
+        - "Mna famasia?"
+        - "Naweza kununua dawa kliniki?"
+        - "Famasia iko wazi wikendi?"
+    answer:
+      en: "Yes, there is a pharmacy on the ground floor, open during clinic hours. We fill prescriptions from any registered doctor."
+      sw: "Ndiyo, kuna famasia ghorofa ya chini, iko wazi wakati wa saa za kliniki. Tunatoa dawa za maagizo kutoka kwa daktari yeyote aliyesajiliwa."
+
+  - id: emergency
+    tags: [emergency, dharura, ambulance]
+    questions:
+      en:
+        - "Do you handle emergencies?"
+        - "Is there an ambulance?"
+        - "What should I do in an emergency?"
+      sw:
+        - "Mnashughulikia dharura?"
+        - "Mna gari la wagonjwa?"
+        - "Nifanye nini wakati wa dharura?"
+    answer:
+      en: "We are an outpatient clinic and cannot manage serious emergencies. In an emergency call 999 or 112, or go to the nearest hospital casualty department."
+      sw: "Sisi ni kliniki ya wagonjwa wa nje na hatuwezi kushughulikia dharura kubwa. Wakati wa dharura piga 999 au 112, au nenda idara ya dharura ya hospitali iliyo karibu."
+
+  - id: telehealth
+    tags: [telehealth, online, phone consultation]
+    questions:
+      en:
+        - "Can I consult a doctor by phone?"
+        - "Do you offer online consultations?"
+        - "Is there a video appointment option?"
+      sw:
+        - "Naweza kuongea na daktari kwa simu?"
+        - "Mnatoa ushauri wa daktari mtandaoni?"
+        - "Kuna miadi ya video?"
+    answer:
+      en: "Yes, 15-minute phone or video consultations are KES 500 (sample price). Book through WhatsApp; the doctor calls you at the booked time. They cannot be used for emergencies."
+      sw: "Ndiyo, mashauriano ya simu au video ya dakika 15 ni KES 500 (bei ya mfano). Weka miadi kupitia WhatsApp; daktari atakupigia wakati uliopangwa. Hayafai kwa dharura."
+
+  - id: medical-certificate
+    tags: [certificate, sick leave, cheti]
+    questions:
+      en:
+        - "Can I get a sick note or medical certificate?"
+        - "How much is a medical report?"
+        - "Do you issue sick leave letters?"
+      sw:
+        - "Naweza kupata cheti cha matibabu?"
+        - "Ripoti ya daktari inagharimu kiasi gani?"
+        - "Mnatoa barua ya ruhusa ya ugonjwa?"
+    answer:
+      en: "Sick notes are issued by the doctor after a consultation at KES 300. Full medical reports for insurance or employers take 3 working days and cost KES 1,500."
+      sw: "Barua za ugonjwa hutolewa na daktari baada ya kumwona kwa KES 300. Ripoti kamili za matibabu kwa bima au waajiri huchukua siku 3 za kazi na zinagharimu KES 1,500."
