@@ -199,7 +199,11 @@ def cmd_unanswered(args: argparse.Namespace) -> int:
 
 
 def cmd_serve(args: argparse.Namespace) -> int:
+    import logging
+
     import uvicorn
+
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s:     %(name)s: %(message)s")
 
     uvicorn.run(
         "jibu.api:app_from_env", factory=True, host=args.host, port=args.port, log_level="info"
