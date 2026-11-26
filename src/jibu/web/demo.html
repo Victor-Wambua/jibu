@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jibu demo</title>
+<meta name="description" content="Demo of the Jibu chat widget on a fictional SACCO website. All data is synthetic.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root {
+  --bg: #fbf8f1; --surface: #ffffff; --ink: #1c2a24; --muted: #55625b; --line: #e4dfd0;
+  --brand: #0f5132; --brand-ink: #ffffff; --accent: #fca311; --accent-ink: #14213d;
+  --ok: #0f5132; --warn: #8a5a00; --ok-bg: #e3f2ea; --warn-bg: #fdf0d3; --chip: #f1ede2;
+  --ring: #14213d;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1713; --surface: #14211b; --ink: #ecf1ed; --muted: #a3b1a8; --line: #26382f;
+    --brand: #62c79a; --brand-ink: #08150e; --ok: #8fe0b9; --warn: #ffcf70; --ok-bg: #173226; --warn-bg: #3a2c0c;
+    --chip: #1b2c24; --ring: #fca311;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+.skip { position: absolute; left: -999px; } .skip:focus { left: var(--s4); top: var(--s4); background: var(--surface); padding: var(--s2) var(--s3); z-index: 10; }
+
+.banner { background: var(--ink); color: var(--bg); font-size: 14px; text-align: center; padding: var(--s2) var(--s4); }
+header.site { border-bottom: 1px solid var(--line); background: var(--surface); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); min-height: 68px; flex-wrap: wrap; padding-block: var(--s2); }
+.brand { display: flex; align-items: center; gap: var(--s3); font-weight: 700; font-size: 20px; letter-spacing: -.01em; text-decoration: none; }
+.brand svg { width: 34px; height: 34px; color: var(--brand); }
+nav ul { display: flex; gap: var(--s5); list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+nav a { text-decoration: none; color: var(--muted); font-weight: 550; padding: var(--s2) 0; }
+nav a:hover { color: var(--ink); }
+
+main .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s6); padding-block: var(--s7); }
+main .wrap > * { max-width: 720px; }
+.hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.08; letter-spacing: -.025em; margin: 0 0 var(--s4); max-width: 16ch; text-wrap: balance; }
+.hero p.lead { font-size: 19px; color: var(--muted); max-width: 52ch; margin: 0 0 var(--s5); }
+.btns { display: flex; gap: var(--s3); flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 var(--s5); border-radius: 12px; background: var(--brand); color: var(--brand-ink); text-decoration: none; font-weight: 650; border: 0; cursor: pointer; font-size: 16px; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--s4); margin-top: var(--s7); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: var(--s5); }
+.card h2 { margin: 0 0 var(--s2); font-size: 18px; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.card .num { font: 600 13px var(--mono); color: var(--brand); letter-spacing: .04em; margin-bottom: var(--s3); display: block; }
+
+aside.inspector { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: var(--s5); display: grid; gap: var(--s4); }
+.inspector h2 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 650; }
+.inspector h3 { margin: 0 0 var(--s2); font-size: 13px; color: var(--muted); font-weight: 600; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--line); border-radius: 12px; padding: 3px; gap: 3px; }
+.seg button { min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); }
+.try { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.try button { min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; text-align: left; }
+.try button:hover { border-color: var(--brand); }
+.result { border-top: 1px dashed var(--line); padding-top: var(--s4); min-height: 190px; }
+.empty { color: var(--muted); font-size: 14px; margin: 0; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; padding: 4px 12px; border-radius: 999px; letter-spacing: .02em; }
+.chip.answered, .chip.smalltalk { background: var(--ok-bg); color: var(--ok); }
+.chip.handoff { background: var(--warn-bg); color: var(--warn); }
+.meter { position: relative; height: 10px; border-radius: 999px; background: var(--chip); margin: var(--s3) 0 var(--s2); }
+.meter .fill { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--ok); }
+.meter.low .fill { background: var(--warn); }
+.meter .tick { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--ink); }
+.small { font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: var(--s3); }
+dl { display: grid; grid-template-columns: auto 1fr; gap: var(--s1) var(--s4); margin: var(--s3) 0 0; font-size: 14px; }
+dt { color: var(--muted); } dd { margin: 0; font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; padding-block: var(--s6); }
+footer .wrap { display: block; padding: 0; }
+
+@media (max-width: 960px) {
+  main .wrap { padding-block: var(--s6); }
+}
+@media (max-width: 560px) {
+  nav ul { gap: var(--s4); }
+  .hero p.lead { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="banner">Demo page for Jibu. Umoja Sacco and Afya Bora Clinic are fictional; all details are synthetic.</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/" id="brandLink">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.4"/><path d="M9 18c2-5 5-7 7-7s5 2 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="21" r="2.2" fill="currentColor"/></svg>
+      <span id="siteName">Umoja Sacco</span>
+    </a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div>
+      <section class="hero">
+        <h1 id="heroTitle">Save together. Borrow with confidence.</h1>
+        <p class="lead" id="heroLead">Membership, savings and loans for people who build things together. Questions about joining, rates or opening hours? Ask Jibu in the chat corner, in English or Kiswahili.</p>
+        <div class="btns">
+          <button class="btn" type="button" id="openChat">Ask a question</button>
+          <a class="btn ghost" href="#services">See services</a>
+        </div>
+      </section>
+      <section class="cards" id="services" aria-label="Services">
+        <article class="card"><span class="num">01</span><h2 id="c1t">Membership</h2><p id="c1p">Individuals, youth and registered groups can join.</p></article>
+        <article class="card"><span class="num">02</span><h2 id="c2t">Savings</h2><p id="c2p">Long-term deposits, flexible savings and fixed deposits.</p></article>
+        <article class="card"><span class="num">03</span><h2 id="c3t">Loans</h2><p id="c3p">Development, emergency, school fees and business loans.</p></article>
+      </section>
+    </div>
+
+    <aside class="inspector" aria-label="Jibu inspector">
+      <h2>Under the hood</h2>
+      <div>
+        <h3 id="kbLabel">Knowledge base</h3>
+        <div class="seg" role="group" aria-labelledby="kbLabel">
+          <button type="button" data-kb="umoja-sacco" aria-pressed="true">Umoja Sacco</button>
+          <button type="button" data-kb="afya-clinic" aria-pressed="false">Afya Clinic</button>
+        </div>
+      </div>
+      <div>
+        <h3>Try asking</h3>
+        <div class="try" id="examples"></div>
+      </div>
+      <div class="result" aria-live="polite" id="result">
+        <p class="empty">Send a message and the matching details appear here: whether it was answered or handed off, how confident the match was against the threshold, and which approved entry it came from.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" id="contact">
+    <p>Jibu answers only from the organisation's approved FAQ and hands over to staff when unsure. Sample data only; nothing on this page is a real service.</p>
+  </div>
+</footer>
+
+<script src="/widget.js" data-autoinit="false" defer></script>
+<script src="/demo.js" defer></script>
+</body>
+</html>
