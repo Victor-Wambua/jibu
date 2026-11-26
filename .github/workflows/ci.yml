@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install
+        run: uv sync --python 3.12
+      - name: Lint
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+      - name: Type check
+        run: uv run mypy
+      - name: Validate knowledge bases
+        run: uv run jibu kb check kb
+      - name: Tests (includes the evaluation floor)
+        run: uv run pytest --cov=jibu --cov-report=term-missing
+      - name: Evaluation report
+        run: uv run jibu eval --quiet
