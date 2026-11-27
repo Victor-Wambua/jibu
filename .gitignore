@@ -13,3 +13,10 @@ data/
 *.jsonl
 tools-local/
 .DS_Store
+
+# demo
+demo/dist/
+demo/node_modules/
+demo/test-results/
+demo/playwright-report/
+demo/golden.json

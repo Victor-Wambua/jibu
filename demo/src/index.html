@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask a question - Jibu demo</title>
+<meta name="description" content="Jibu answers English and Kiswahili questions only from an approved FAQ and hands off to staff when unsure. This page runs the real Python engine in your browser.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="banner">
+    <div class="wrap">
+      <p><strong>Static demo.</strong> Runs in your browser on invented data; nothing is sent anywhere. The real project is a Python service (a FastAPI chat API and a WhatsApp webhook): <a href="https://github.com/Victor-Wambua/jibu">repository</a>, <a href="https://github.com/Victor-Wambua/jibu#readme">README</a>. <a href="#how">How this demo works</a>.</p>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <p class="wordmark"><a href="#ask">Jibu</a><span lang="en">Kiswahili for &ldquo;answer&rdquo;</span></p>
+    <nav aria-label="Demo sections">
+      <ul>
+        <li><a href="#ask" data-nav="ask">Ask</a></li>
+        <li><a href="#kb" data-nav="kb">Knowledge base</a></li>
+        <li><a href="#eval" data-nav="eval">Evaluation</a></li>
+        <li><a href="#how" data-nav="how">How it works</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="context">
+  <div class="wrap">
+    <form class="ctx" id="ctx" aria-label="Engine settings" onsubmit="return false">
+      <div class="field">
+        <label for="kb-select">Knowledge base</label>
+        <select id="kb-select" disabled></select>
+      </div>
+      <div class="field">
+        <label for="threshold">Hand-off threshold <output id="threshold-out" for="threshold">0.50</output></label>
+        <input id="threshold" type="range" min="0.30" max="0.90" step="0.05" value="0.50" aria-describedby="threshold-help" disabled>
+        <p class="help" id="threshold-help">Below this confidence, Jibu hands off.</p>
+      </div>
+      <div class="field">
+        <label for="as-of">Answer as of</label>
+        <input id="as-of" type="date" aria-describedby="as-of-help" disabled>
+        <p class="help" id="as-of-help">Entries can expire. The evaluation uses its own fixed date.</p>
+      </div>
+      <div class="field">
+        <button type="button" id="reset" class="btn quiet" disabled>Reset demo</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <noscript><p class="boot failed">This demo needs JavaScript: the engine runs in your browser. Without it, see the <a href="https://github.com/Victor-Wambua/jibu#readme">README</a> for screenshots and a quick start.</p></noscript>
+  <div id="boot" class="boot" role="status">
+    <p><span class="spin" aria-hidden="true"></span><span id="boot-text">Starting the engine. The first visit downloads about 16 MB (Python and the engine); later visits use your browser&rsquo;s copy.</span></p>
+  </div>
+
+  <!-- ASK -->
+  <section id="view-ask" data-view="ask" aria-labelledby="h-ask" hidden>
+    <div class="ask-grid">
+      <div class="chat-col">
+        <h1 id="h-ask" tabindex="-1">Ask a question</h1>
+        <p class="lead">Type in English, Kiswahili or both. Jibu replies only with an answer the organisation wrote in advance. If it is not sure, it hands the question to staff instead of guessing.</p>
+
+        <section aria-labelledby="conv-h" class="conv">
+          <div class="conv-head">
+            <h2 id="conv-h">Conversation</h2>
+            <button type="button" class="btn quiet" id="new-conv">New conversation</button>
+          </div>
+          <div id="log" class="log" role="log" aria-live="polite" aria-relevant="additions" tabindex="0" aria-label="Conversation with Jibu"></div>
+          <form id="composer" class="composer" autocomplete="off">
+            <label for="q">Your question</label>
+            <div class="composer-row">
+              <input id="q" name="q" type="text" maxlength="500" enterkeyhint="send" aria-describedby="q-help q-error" disabled>
+              <button type="submit" class="btn primary" id="send" disabled>Ask</button>
+            </div>
+            <p class="help" id="q-help">Up to 500 characters. Nothing is stored; the chat disappears when you reload.</p>
+            <p class="error" id="q-error" role="alert" hidden></p>
+          </form>
+        </section>
+
+        <section aria-labelledby="try-h" class="try-block">
+          <h2 id="try-h">Try this</h2>
+          <ul id="try-list" class="try"></ul>
+        </section>
+      </div>
+
+      <aside id="why" class="why" aria-labelledby="why-h" tabindex="-1">
+        <h2 id="why-h">Why this reply</h2>
+        <div id="why-body">
+          <p class="empty">Ask a question and this panel shows how Jibu decided: which words matched, which entry won, how far ahead of the runner-up it was, and whether the confidence cleared the threshold.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section aria-labelledby="queue-h" class="queue">
+      <h2 id="queue-h">Staff hand-off queue</h2>
+      <p class="help">What the real service would pass to staff. By default it keeps no message text, only the fields below. This queue lives in this tab and is cleared on reload.</p>
+      <div id="queue-body"></div>
+    </section>
+  </section>
+
+  <!-- KNOWLEDGE BASE -->
+  <section id="view-kb" data-view="kb" aria-labelledby="h-kb" hidden>
+    <h1 id="h-kb" tabindex="-1">Knowledge base</h1>
+    <p class="lead" id="kb-lead"></p>
+    <div id="kb-body"></div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section id="view-eval" data-view="eval" aria-labelledby="h-eval" hidden>
+    <h1 id="h-eval" tabindex="-1">Evaluation</h1>
+    <p class="lead">The repository ships labelled questions for each knowledge base. Press Run and the engine answers every one in this page; the numbers below are computed by the repository&rsquo;s own evaluation code at that moment. None are typed in.</p>
+    <div class="eval-actions">
+      <button type="button" class="btn primary" id="run-eval" disabled>Run evaluation</button>
+      <p class="help" id="eval-status" role="status"></p>
+    </div>
+    <div id="eval-body"></div>
+    <section aria-labelledby="sweep-h" class="sweep">
+      <h2 id="sweep-h">Threshold sweep</h2>
+      <p>How the numbers move as the hand-off threshold changes. The README&rsquo;s threshold of 0.50 was picked on the development split only: the lowest value at which no out-of-scope question in it was answered.</p>
+      <form class="sweep-form" id="sweep-form" onsubmit="return false">
+        <div class="field">
+          <label for="sweep-split">Questions</label>
+          <select id="sweep-split">
+            <option value="dev">Development split</option>
+            <option value="test">Held-out test split</option>
+            <option value="all">All questions</option>
+          </select>
+        </div>
+        <button type="button" class="btn" id="run-sweep" disabled>Run sweep</button>
+      </form>
+      <p class="help" id="sweep-status" role="status"></p>
+      <div id="sweep-body"></div>
+    </section>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="view-how" data-view="how" aria-labelledby="h-how" hidden>
+    <h1 id="h-how" tabindex="-1">How this demo works</h1>
+    <div class="prose">
+      <p class="lead">This page runs the real Jibu engine. It is not a mock-up and it does not call a server.</p>
+
+      <h2>Approach</h2>
+      <p>The repository&rsquo;s own Python code runs in your browser under <a href="https://pyodide.org">Pyodide</a> (CPython compiled to WebAssembly). The runtime, the five libraries it needs and the engine are all files in this site; nothing is fetched from another host. Jibu uses no language model, so there is nothing to simulate: it is plain Python, a YAML knowledge base and BM25 scoring.</p>
+
+      <h2>What is real</h2>
+      <ul>
+        <li>Language detection, tokenising, Kiswahili and English stemming, spell-fixing, synonym groups, BM25 scoring, the confidence formula, the threshold and the hand-off, all from <code>src/jibu</code>.</li>
+        <li>The knowledge bases (<code>kb/*.yaml</code>) and the validator that checks them, with its line-numbered warnings.</li>
+        <li>Sessions (the last matched entry, used for follow-ups) and the hand-off queue, from the same service class the API uses.</li>
+        <li>The labelled question sets (<code>eval/*.yaml</code>) and every metric in the Evaluation view. The test <code>demo/tests/smoke.spec.mjs</code> checks that the page&rsquo;s numbers equal what the command-line <code>jibu eval</code> prints.</li>
+      </ul>
+
+      <h2>What is different or left out</h2>
+      <ul>
+        <li>There is no HTTP API, rate limiting, admin token, CORS, widget or WhatsApp webhook here. They are in the repository and have their own tests.</li>
+        <li>The token table in &ldquo;Why this reply&rdquo; is built by a small helper (<code>demo/py/jibu_demo.py</code>) that reads the engine&rsquo;s own tables. A test checks that its coverage figure equals the engine&rsquo;s.</li>
+        <li>Pyodide ships pydantic 2.10.5, PyYAML 6.0.2 and Python 3.12.7. The repository&rsquo;s lock file pins newer pydantic and PyYAML. The evaluation numbers are identical either way.</li>
+        <li>Speed in your browser is not a benchmark of the real service.</li>
+        <li>The knowledge bases are fictional (a SACCO and a clinic). The evaluation was written by one person on synthetic data, so the figures are optimistic for real traffic. The README says more.</li>
+      </ul>
+
+      <h2>Your data</h2>
+      <p>Questions are processed in this tab by code that has no network access. Nothing is saved to the browser except the files the page caches so it works offline after one visit. Reloading clears the conversation and the hand-off queue.</p>
+
+      <h2>Run the real thing</h2>
+      <p>From the README. Needs <a href="https://docs.astral.sh/uv/">uv</a>.</p>
+      <pre><code>git clone https://github.com/Victor-Wambua/jibu.git &amp;&amp; cd jibu
+uv sync
+uv run jibu ask "Mnafungua saa ngapi?" --org umoja-sacco
+uv run jibu eval
+JIBU_DEFAULT_KB=umoja-sacco uv run jibu serve --port 4110</code></pre>
+
+      <h2>What this page loaded</h2>
+      <div id="how-runtime"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Built by Victor Wambua. <a href="https://github.com/Victor-Wambua/jibu">Source</a> &middot; MIT licence &middot; <a href="vendor/pyodide/NOTICES.txt">Third-party notices</a>. All organisations, numbers and contacts in the knowledge bases are fictional.</p>
+  </div>
+</footer>
+</body>
+</html>

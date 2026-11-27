@@ -1,0 +1,17 @@
+{
+  "name": "jibu-demo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Static demo of Jibu: the real Python engine running in the browser under Pyodide.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node serve.mjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.1",
+    "@playwright/test": "^1.65.1",
+    "axe-core": "^4.14.1"
+  }
+}
