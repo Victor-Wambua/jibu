@@ -25,3 +25,34 @@ jobs:
         run: uv run pytest --cov=jibu --cov-report=term-missing
       - name: Evaluation report
         run: uv run jibu eval --quiet
+
+  demo:
+    name: Browser demo (build and Pyodide smoke tests)
+    runs-on: ubuntu-latest
+    needs: check
+    defaults:
+      run:
+        working-directory: demo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install the Python package (for the native reference numbers)
+        working-directory: .
+        run: uv sync --python 3.12
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: demo/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Build the demo and run the browser tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            demo/playwright-report
+            demo/test-results
+          retention-days: 7

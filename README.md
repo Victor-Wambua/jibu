@@ -10,9 +10,21 @@
 
 *"Jibu" is Kiswahili for "answer".*
 
+**Live demo: [victor-wambua.github.io/jibu](https://victor-wambua.github.io/jibu/)**. The real engine runs in your browser, no server involved.
+
 > **Status:** portfolio build. Runs locally with synthetic sample data (a fictional SACCO and a fictional clinic). Not deployed, no real users. The WhatsApp adapter has not been tested against the live Meta API.
 
 ![Jibu chat widget answering a follow-up question, with the confidence panel beside it](docs/screenshots/demo-inspector.png)
+
+## Live demo
+
+The [demo page](https://victor-wambua.github.io/jibu/) is a static site that runs the **real Python engine in your browser** (approach: the repository's own code under self-hosted [Pyodide](https://pyodide.org), 15 MB, no CDN, works offline after one visit). Ask in English, Kiswahili or both and see the reply with its source entry, the matched words, the winner and runner-up, and the confidence against the threshold; browse the knowledge base; run the labelled evaluation set live and see the numbers the repository's own `jibu.evaluation` computes.
+
+What is real: language detection, stemming, BM25, confidence, threshold, hand-off, sessions, the hand-off queue, the KB validator, the evaluation metrics. What is not there: the HTTP API, rate limiting, admin token, widget and WhatsApp webhook. Data is the synthetic sample KBs; nothing leaves the browser. The page's code is in [`demo/`](demo/); `demo/build.mjs` copies `src/jibu`, `kb/` and `eval/` into the site at build time, and the browser tests in CI check that the page's evaluation figures equal what `jibu eval` computes natively.
+
+Run it locally: `cd demo && npm ci && node build.mjs && PORT=8960 node serve.mjs`, then open http://localhost:8960/jibu/. Browser tests: `npx playwright install chromium && npx playwright test` (needs `uv` for the native reference numbers).
+
+![Jibu demo: a hand-off with the reason, the matched words and the staff queue](docs/screenshots/demo-live.png)
 
 ## The problem
 
@@ -145,7 +157,7 @@ Speed: about 0.7 ms per question and 60 ms to build the index on my laptop (39 e
 ## Testing
 
 ```bash
-uv run pytest                 # 184 tests, offline, ~6 s; 94% line coverage
+uv run pytest                 # 190 tests, offline, ~6 s; 94% line coverage
 uv run ruff check . && uv run ruff format --check .
 uv run mypy                   # strict
 make check                    # all of the above
@@ -168,7 +180,8 @@ src/jibu/
   privacy.py unanswered.py    redaction, opt-in queue
   ratelimit.py sessions.py config.py cli.py
   web/                        jibu-widget.js, demo.html, demo.js
-tests/              184 tests
+demo/               static GitHub Pages demo (Pyodide), build, browser tests
+tests/              190 tests
 docs/               CASE-STUDY.md, architecture.svg, screenshots/
 ```
 
